@@ -14,7 +14,6 @@ namespace RealEstateDev.Entities
         public House() { }
         public House(string name, int value, int area, int landArea) : base(name, value, area)
         {
-
             LandArea = landArea;
         }
         public override string ToString() => $"Id: {Id}, FirstName: {Name}, Value: {Value}, Area: {Area}, Land area: {LandArea}";

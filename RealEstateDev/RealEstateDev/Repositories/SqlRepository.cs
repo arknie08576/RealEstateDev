@@ -13,38 +13,26 @@ namespace RealEstateDev.Repositories
 
         private readonly DbSet<T> _dbSet;
         private readonly DbContext _dbContext;
-
         public SqlRepository(DbContext dbContex)
         {
-
             _dbContext = dbContex;
             _dbSet = _dbContext.Set<T>();
         }
-
         public T GetById(int id)
         {
-
             return _dbSet.Find(id);
-
         }
-
-
         public void Add(T item)
         {
-
             _dbSet.Add(item);
         }
-
         public void Remove(T item)
         {
-
             _dbSet.Remove(item);
         }
-
         public void Save()
         {
             _dbContext.SaveChanges();
-
         }
         public IEnumerable<T> GetAll()
         {

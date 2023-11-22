@@ -15,6 +15,5 @@ sqlRepository.Save();
 
 foreach (var item in sqlRepository.GetAll())
 {
-
     Console.WriteLine(item.ToString());
 }

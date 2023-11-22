@@ -11,6 +11,5 @@ namespace RealEstateDev.Repositories
     {
         IEnumerable<T> GetAll();
         T GetById(int id);
-
     }
 }
