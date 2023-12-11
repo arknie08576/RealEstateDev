@@ -19,5 +19,9 @@ namespace RealEstateDev.Entities
             Value = value;
             Area = area;
         }
+        public override string ToString()
+        {
+            return "Id:";
+        }
     }
 }

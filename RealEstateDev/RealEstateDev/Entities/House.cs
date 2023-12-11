@@ -16,6 +16,9 @@ namespace RealEstateDev.Entities
         {
             LandArea = landArea;
         }
-        public override string ToString() => $"Id: {Id}, FirstName: {Name}, Value: {Value}, Area: {Area}, Land area: {LandArea}";
+        public override string ToString()
+        {
+            return $"Id: {Id}, FirstName: {Name}, Value: {Value}, Area: {Area}, Land area: {LandArea}";
+        }
     }
 }

@@ -14,6 +14,11 @@ namespace RealEstateDev.Entities
         {
             Floor = floor;
         }
-        public override string ToString() => $"Id: {Id}, FirstName: {Name}, Value: {Value}, Area: {Area}, Floor: {Floor}";
+        public override string ToString()
+        {
+
+
+         return $"Id: {Id}, FirstName: {Name}, Value: {Value}, Area: {Area}, Floor: {Floor}";
+        }
     }
 }
