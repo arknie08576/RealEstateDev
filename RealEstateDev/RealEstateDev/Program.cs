@@ -8,7 +8,6 @@ var fileRepository = new FileRepository<RealEstate>();
 fileRepository.ItemAdded += RealEstateRepoOnItemAdded;
 fileRepository.ItemRemoved += RealEstateRepoOnItemRemoved;
 
-
 bool runProgram=true;
 while (runProgram)
 {
@@ -21,7 +20,6 @@ while (runProgram)
             foreach (var item in fileRepository.GetAll())
             {
                 Console.WriteLine(item);
-
             }
             break;
         case "2":
@@ -31,7 +29,7 @@ while (runProgram)
                 Console.WriteLine("Wpisz d jeśli chcesz dodać dom lub m jeśli chcesz dodać mieszkanie");
             y = Console.ReadLine();
             }
-            if (y == "d") //string name, int value, int area, int landArea
+            if (y == "d") 
             {
                 Console.WriteLine("Wpisz nazwę domu");
                 string name= Console.ReadLine();
@@ -42,9 +40,8 @@ while (runProgram)
                 Console.WriteLine("Wpisz powierzchnię działki domu");
                 int landArea = Int32.Parse(Console.ReadLine());
                 fileRepository.Add(new House(name,  value,  area,  landArea));
-
             }
-            if (y == "m") //string name, int value, int area, int landArea
+            if (y == "m") 
             {
                 Console.WriteLine("Wpisz nazwę mieszkania");
                 string name = Console.ReadLine();
@@ -55,10 +52,7 @@ while (runProgram)
                 Console.WriteLine("Wpisz piętro mieszkania");
                 int floor = Int32.Parse(Console.ReadLine());
                 fileRepository.Add(new Apartment(name, value, area, floor));
-
             }
-
-
             break; 
         case "3":
             Console.WriteLine("Wpisz id nieruchomości do usunięcia");
@@ -79,26 +73,8 @@ while (runProgram)
             break;
         default:
             break;
-
-
-
     }
 }
-
-
-
-
-
-
-/*
-fileRepository.Add(new Apartment("Małe mieszkanie", 500000, 50, 3));
-fileRepository.Add(new Apartment("Duża kawalerka", 300000, 30, 2));
-fileRepository.Add(new Apartment("Duży apartament", 1000000, 150, 5));
-fileRepository.Add(new House("Średni dom", 1200000, 150, 300));
-fileRepository.Add(new House("Duży dom", 1500000, 190, 400));
-fileRepository.Save();
-
-*/
 void PrintMenu()
 {
     Console.WriteLine("Witaj w programie do zarządzania nieruchomościami");

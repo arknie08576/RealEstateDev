@@ -8,7 +8,7 @@ namespace RealEstateDev.Entities
 {
     internal class Apartment : RealEstate
     {
-        int Floor { get; set; }
+        public int Floor { get; set; }
         public Apartment() { }
         public Apartment(string name, int value, int area, int floor) : base(name, value, area)
         {
@@ -16,9 +16,7 @@ namespace RealEstateDev.Entities
         }
         public override string ToString()
         {
-
-
-         return $"Id: {Id}, FirstName: {Name}, Value: {Value}, Area: {Area}, Floor: {Floor}";
+            return $"Id: {Id}, FirstName: {Name}, Value: {Value}, Area: {Area}, Floor: {Floor}";
         }
     }
 }

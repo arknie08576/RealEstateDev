@@ -10,7 +10,7 @@ namespace RealEstateDev.Entities
 {
     internal class House : RealEstate
     {
-        int LandArea { get; set; }
+        public int LandArea { get; set; }
         public House() { }
         public House(string name, int value, int area, int landArea) : base(name, value, area)
         {

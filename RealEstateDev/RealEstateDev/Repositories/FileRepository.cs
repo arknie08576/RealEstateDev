@@ -19,7 +19,8 @@ namespace RealEstateDev.Repositories
         public event EventHandler<T>? ItemAdded;
         public event EventHandler<T>? ItemRemoved;
 
-        public FileRepository() {
+        public FileRepository()
+        {
             fileName = "file.json";
             Load();
         }
@@ -40,7 +41,6 @@ namespace RealEstateDev.Repositories
         public void Save()
         {
             JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-            //var json = JsonSerializer.Serialize<IEnumerable<T>>(_items);
             var json = JsonConvert.SerializeObject(_items, settings);
             File.WriteAllText(fileName, json);
         }
@@ -50,7 +50,6 @@ namespace RealEstateDev.Repositories
             {
                 JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
                 var json = File.ReadAllText(fileName);
-                //var items = JsonSerializer.Deserialize<IEnumerable<T>>(json);
                 var items = JsonConvert.DeserializeObject<List<T>>(json, settings);
 
                 if (items != null)
