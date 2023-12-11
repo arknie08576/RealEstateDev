@@ -9,15 +9,6 @@ fileRepository.ItemAdded += RealEstateRepoOnItemAdded;
 fileRepository.ItemRemoved += RealEstateRepoOnItemRemoved;
 
 
-
-fileRepository.Save();
-
-
-
-
-
-
-
 bool runProgram=true;
 while (runProgram)
 {
