@@ -13,6 +13,10 @@ namespace RealEstateDev.Repositories
 
         private readonly DbSet<T> _dbSet;
         private readonly DbContext _dbContext;
+
+        public event EventHandler<T>? ItemAdded;
+        public event EventHandler<T>? ItemRemoved;
+
         public SqlRepository(DbContext dbContex)
         {
             _dbContext = dbContex;
