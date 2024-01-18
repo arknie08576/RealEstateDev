@@ -69,12 +69,12 @@ namespace RealEstateDev.Components.CsvReader
                 Average = g.Average(c => c.Combined)
             }).OrderBy(x => x.Average);
 
-            foreach (var group in groups)
-            {
-                Console.WriteLine($"{group.Name}");
-                Console.WriteLine($"Max: {group.Max}");
-                Console.WriteLine($"Average: {group.Average}");
-            }
+            //foreach (var group in groups)
+            //{
+            //    Console.WriteLine($"{group.Name}");
+            //    Console.WriteLine($"Max: {group.Max}");
+            //    Console.WriteLine($"Average: {group.Average}");
+            //}
 
             var carsInCountry = cars.Join(manufacturers, x => new { x.Manufacturer, x.Year }, x => new { Manufacturer = x.Name, x.Year }, (car, manufacturer) => new
             {
