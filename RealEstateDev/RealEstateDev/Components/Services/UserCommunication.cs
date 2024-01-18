@@ -1,4 +1,6 @@
-﻿using RealEstateDev.DataProviders;
+﻿using RealEstateDev.Components.DataProviders;
+using RealEstateDev.Data;
+using RealEstateDev.DataProviders;
 using RealEstateDev.Entities;
 using RealEstateDev.Repositories;
 using System;

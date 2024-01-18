@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using RealEstateDev.DataProviders;
 using RealEstateDev.Entities;
 using RealEstateDev.Repositories;
 using System;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace RealEstateDev.DataProviders
+namespace RealEstateDev.Components.DataProviders
 {
     public class RealEstateProvider : IRealEstateProvider
     {
@@ -124,7 +125,7 @@ namespace RealEstateDev.DataProviders
         public RealEstate? SingleOrDefaultById(int id)
         {
             var RealEstates = _RealEstatesRepository.GetAll();
-            return RealEstates.SingleOrDefault(x => x.Id == id, 
+            return RealEstates.SingleOrDefault(x => x.Id == id,
                 new RealEstate { Id = -1, Name = "NOT FOUND" });
         }
 

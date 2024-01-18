@@ -1,18 +1,23 @@
-﻿using RealEstateDev.Entities;
-using RealEstateDev.Repositories;
-using RealEstateDev.Data;
+﻿using RealEstateDev.Data;
 using System.Drawing;
 using System.Xml.Linq;
 using Microsoft.Extensions.DependencyInjection;
-using RealEstateDev.Services;
 using RealEstateDev;
+using RealEstateDev.Components.DataProviders;
+using RealEstateDev.Repositories;
+using RealEstateDev.Entities;
 using RealEstateDev.DataProviders;
+using RealEstateDev.Services;
+using RealEstateDev.Components.CsvReader;
+using RealEstateDev.Components.XmlCreator;
 
 var services = new ServiceCollection();
 services.AddSingleton<IApp, App>();
 services.AddSingleton<IRepository<RealEstate>, FileRepository<RealEstate>>();
 services.AddSingleton<IRealEstateProvider, RealEstateProvider>();
 services.AddSingleton<IUserCommunication, UserCommunication>();
+services.AddSingleton<ICsvReader, CsvReader>();
+services.AddSingleton<IXmlCreator, XmlCreator>();
 var serviceProvider = services.BuildServiceProvider();
 var app = serviceProvider.GetService<IApp>()!;
 app.Run();
