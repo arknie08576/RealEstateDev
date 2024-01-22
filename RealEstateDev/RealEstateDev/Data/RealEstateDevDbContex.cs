@@ -6,17 +6,22 @@ using System.Text;
 using System.Threading.Tasks;
 using RealEstateDev.Data;
 using RealEstateDev.Entities;
-
+using RealEstateDev.Components.CsvReader.Models;
 
 namespace RealEstateDev.Data
 {
     public class RealEstateDevDbContex : DbContext
     {
-        public DbSet<RealEstate> RealEstates => Set<RealEstate>();
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public RealEstateDevDbContex(DbContextOptions<RealEstateDevDbContex> options):base(options) 
         {
-            base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseInMemoryDatabase("StorageAppDb");
+            
         }
+        public DbSet<Car> Cars { get; set; }
+        //public DbSet<RealEstate> RealEstates => Set<RealEstate>();
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    base.OnConfiguring(optionsBuilder);
+        //    optionsBuilder.UseInMemoryDatabase("StorageAppDb");
+        //}
     }
 }

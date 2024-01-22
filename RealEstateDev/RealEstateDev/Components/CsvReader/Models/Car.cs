@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RealEstateDev.Components.CsvReader.Models
 {
-    public  class Car
+    public  class Car : EntityBase
     {
 
         public int Year { get; set; }
