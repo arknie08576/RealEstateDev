@@ -1,21 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using RealEstateDev.DataProviders;
-using RealEstateDev.Entities;
+﻿using RealEstateDev.Entities;
 using RealEstateDev.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using TDev.DataProviders;
 
 namespace RealEstateDev.Components.DataProviders
 {
-    public class RealEstateProvider : IRealEstateProvider
+    public class RealEstateProvider<T> : IRealEstateProvider<T> where T : class, IEntity, new ()
     {
-        private readonly IRepository<RealEstate> _RealEstatesRepository;
+        private readonly IRepository<T> _RealEstatesRepository;
 
-        public RealEstateProvider(IRepository<RealEstate> realEstatesRepository)
+        public RealEstateProvider(IRepository<T> realEstatesRepository)
         {
             _RealEstatesRepository = realEstatesRepository;
         }
@@ -27,110 +20,110 @@ namespace RealEstateDev.Components.DataProviders
             return RealEstates.Select(x => x.Name.ToString()).Distinct().ToList();
         }
 
-        public List<RealEstate> GetSpecificColumns()
-        {
-            var RealEstates = _RealEstatesRepository.GetAll();
-            return RealEstates.Select(RealEstate => new RealEstate
-            {
-                Id = RealEstate.Id,
-                Area = RealEstate.Area,
-                Name = RealEstate.Name,
-                Value = RealEstate.Value
-            }).ToList();
-        }
+        //public List<RealEstate> GetSpecificColumns()
+        //{
+        //    var RealEstates = _RealEstatesRepository.GetAll();
+        //    return RealEstates.Select(RealEstate => new RealEstate
+        //    {
+        //        Id = RealEstate.Id,
+        //        Area = RealEstate.Area,
+        //        Name = RealEstate.Name,
+        //        Value = RealEstate.Value
+        //    }).ToList();
+        //}
 
-        public string AnonymousClass()
-        {
-            var RealEstates = _RealEstatesRepository.GetAll();
-            var list = RealEstates.Select(RealEstate => new
-            {
-                Identifier = RealEstate.Id,
-                RealEstateName = RealEstate.Name,
-                RealEstateValue = RealEstate.Value
-            });
-            StringBuilder sb = new StringBuilder(2048);
-            foreach (var RealEstate in list)
-            {
-                sb.AppendLine($"Product ID: {RealEstate.Identifier}");
-                sb.AppendLine($"    RealEstate Name: {RealEstate.RealEstateName}");
-                sb.AppendLine($"    RealEstate Value: {RealEstate.RealEstateValue}");
-            }
+        //public string AnonymousClass()
+        //{
+        //    var RealEstates = _RealEstatesRepository.GetAll();
+        //    var list = RealEstates.Select(RealEstate => new
+        //    {
+        //        Identifier = RealEstate.Id,
+        //        RealEstateName = RealEstate.Name,
+        //        RealEstateValue = RealEstate.Value
+        //    });
+        //    StringBuilder sb = new StringBuilder(2048);
+        //    foreach (var RealEstate in list)
+        //    {
+        //        sb.AppendLine($"Product ID: {RealEstate.Identifier}");
+        //        sb.AppendLine($"    RealEstate Name: {RealEstate.RealEstateName}");
+        //        sb.AppendLine($"    RealEstate Value: {RealEstate.RealEstateValue}");
+        //    }
 
-            return sb.ToString();
-        }
+        //    return sb.ToString();
+        //}
 
         // ORDER BY
-        public List<RealEstate> OrderByNames()
+        public List<T> OrderByNames()
         {
             var RealEstates = _RealEstatesRepository.GetAll();
             return RealEstates.OrderBy(x => x.Name).ToList();
         }
-        public List<RealEstate> OrderByNamesAndValueDescending()
-        {
-            var RealEstates = _RealEstatesRepository.GetAll();
-            return RealEstates
-                .OrderByDescending(x => x.Name)
-                .ThenByDescending(x => x.Value)
-                .ToList();
-        }
+        //public List<T> OrderByNamesAndValueDescending()
+        //{
+        //    var RealEstates = _RealEstatesRepository.GetAll();
+        //    return RealEstates
+        //        .OrderByDescending(x => x.Name)
+        //        .ThenByDescending(x => x.Value)
+        //        .ToList();
+        //}
 
-        public List<RealEstate> OrderByValue()
+        public List<T> OrderByValue()
         {
             var RealEstates = _RealEstatesRepository.GetAll();
             return RealEstates.OrderBy(x => x.Value).ToList();
         }
 
-        // WHERE
+        //WHERE
 
-        public List<RealEstate> WhereStartsWith(string prefix)
+        public List<T> WhereStartsWith(string prefix)
         {
             var RealEstates = _RealEstatesRepository.GetAll();
             return RealEstates.Where(x => x.Name.StartsWith(prefix)).ToList();
         }
 
-        public List<RealEstate> WhereNameIs(string author)
+        public List<T> WhereNameIs(string author)
         {
             var RealEstates = _RealEstatesRepository.GetAll();
             return RealEstates.Where(x => x.Name == author).ToList();
         }
 
         // FIRST, LAST, SINGLE
-        public RealEstate FirstOrDefaultByNameWithDefault(string name)
+        public T FirstOrDefaultByNameWithDefault(string name)
         {
             var RealEstates = _RealEstatesRepository.GetAll();
             return RealEstates
                 .FirstOrDefault(
                 x => x.Name == name,
-                new RealEstate { Id = -1, Name = "NOT FOUND" });
+                new T { Id = -1, Name = "NOT FOUND" });
 
         }
 
-        public RealEstate? FirstByValue()
+        public T? FirstByValue()
         {
             var RealEstates = _RealEstatesRepository.GetAll();
             return RealEstates.OrderBy(x => x.Value).FirstOrDefault();
         }
-        public RealEstate LastByName(string name)
+        public T LastByName(string name)
         {
             var RealEstates = _RealEstatesRepository.GetAll();
             return RealEstates.Last(x => x.Name == name);
         }
 
-        public RealEstate SingleById(int id)
+        public T SingleById(int id)
         {
             var RealEstates = _RealEstatesRepository.GetAll();
             return RealEstates.Single(x => x.Id == id);
         }
 
-        public RealEstate? SingleOrDefaultById(int id)
+        public T? SingleOrDefaultById(int id)
         {
             var RealEstates = _RealEstatesRepository.GetAll();
             return RealEstates.SingleOrDefault(x => x.Id == id,
-                new RealEstate { Id = -1, Name = "NOT FOUND" });
+                new T { Id = -1, Name = "NOT FOUND" });
         }
 
         // TAKE
-        public List<RealEstate> TakeRealEstates(int howMany)
+        public List<T> TakeRealEstates(int howMany)
         {
             var RealEstates = _RealEstatesRepository.GetAll();
             return RealEstates
@@ -139,7 +132,7 @@ namespace RealEstateDev.Components.DataProviders
                 .ToList();
         }
 
-        public List<RealEstate> TakeRealEstates(Range range)
+        public List<T> TakeRealEstates(Range range)
         {
             var RealEstates = _RealEstatesRepository.GetAll();
             return RealEstates
@@ -148,33 +141,33 @@ namespace RealEstateDev.Components.DataProviders
                 .ToList();
         }
 
-        public List<RealEstate> TakeRealEstatesWhileRealiseDataAfter(DateTime date)
-        {
-            var RealEstates = _RealEstatesRepository.GetAll();
-            return RealEstates
-                .OrderByDescending(x => x.dateTime)
-                .TakeWhile(x => x.dateTime >= date)
-                .ToList();
-        }
+        //public List<RealEstate> TakeRealEstatesWhileRealiseDataAfter(DateTime date)
+        //{
+        //    var RealEstates = _RealEstatesRepository.GetAll();
+        //    return RealEstates
+        //        .OrderByDescending(x => x.dateTime)
+        //        .TakeWhile(x => x.dateTime >= date)
+        //        .ToList();
+        //}
 
         // SKIP
-        public List<RealEstate> SkipRealEstates(int howMany)
-        {
-            var RealEstates = _RealEstatesRepository.GetAll();
-            return RealEstates
-                .OrderBy(x => x.Name)
-                .Skip(howMany)
-                .ToList();
-        }
+        //public List<RealEstate> SkipRealEstates(int howMany)
+        //{
+        //    var RealEstates = _RealEstatesRepository.GetAll();
+        //    return RealEstates
+        //        .OrderBy(x => x.Name)
+        //        .Skip(howMany)
+        //        .ToList();
+        //}
 
-        public List<RealEstate> SkipRealEstatesWhileRealiseDataAfter(DateTime date)
-        {
-            var RealEstates = _RealEstatesRepository.GetAll();
-            return RealEstates
-               .OrderByDescending(x => x.dateTime)
-               .SkipWhile(x => x.dateTime >= date)
-               .ToList();
-        }
+        //public List<RealEstate> SkipRealEstatesWhileRealiseDataAfter(DateTime date)
+        //{
+        //    var RealEstates = _RealEstatesRepository.GetAll();
+        //    return RealEstates
+        //       .OrderByDescending(x => x.dateTime)
+        //       .SkipWhile(x => x.dateTime >= date)
+        //       .ToList();
+        //}
 
         // DISTINCT
         public List<string> DistinctAllNames()
@@ -186,7 +179,7 @@ namespace RealEstateDev.Components.DataProviders
                .ToList();
         }
 
-        public List<RealEstate> DistinctByName()
+        public List<T> DistinctByName()
         {
             var RealEstates = _RealEstatesRepository.GetAll();
             return RealEstates
@@ -196,7 +189,7 @@ namespace RealEstateDev.Components.DataProviders
         }
 
         // CHUNK
-        public List<RealEstate[]> ChunkRealEstates(int size)
+        public List<T[]> ChunkRealEstates(int size)
         {
             var RealEstates = _RealEstatesRepository.GetAll();
             return RealEstates.Chunk(size).ToList();

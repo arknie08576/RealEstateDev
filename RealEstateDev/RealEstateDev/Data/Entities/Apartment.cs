@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RealEstateDev.Entities
 {
-    internal class Apartment : RealEstate
+    public class Apartment : RealEstate
     {
         public int Floor { get; set; }
         public Apartment() { }

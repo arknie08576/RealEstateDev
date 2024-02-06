@@ -16,7 +16,8 @@ namespace RealEstateDev.Data
         {
             
         }
-        public DbSet<Car> Cars { get; set; }
+        public DbSet<House> Houses { get; set; }
+        public DbSet<Apartment> Apartments { get; set; }
         //public DbSet<RealEstate> RealEstates => Set<RealEstate>();
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{

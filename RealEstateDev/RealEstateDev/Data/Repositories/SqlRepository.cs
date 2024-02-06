@@ -18,7 +18,7 @@ namespace RealEstateDev.Repositories
         public event EventHandler<T>? ItemAdded;
         public event EventHandler<T>? ItemRemoved;
 
-        public SqlRepository(DbContext dbContex)
+        public SqlRepository(RealEstateDevDbContex dbContex)
         {
             _dbContext = dbContex;
             _dbSet = _dbContext.Set<T>();

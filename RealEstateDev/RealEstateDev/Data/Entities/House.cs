@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace RealEstateDev.Entities
 {
-    internal class House : RealEstate
+    public class House : RealEstate
     {
         public int LandArea { get; set; }
         public House() { }

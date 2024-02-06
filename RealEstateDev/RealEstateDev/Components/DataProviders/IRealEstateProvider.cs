@@ -1,49 +1,44 @@
 ﻿using RealEstateDev.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RealEstateDev.DataProviders
+namespace TDev.DataProviders
 {
-    public interface IRealEstateProvider
+    public interface IRealEstateProvider<T> where T : class, IEntity, new()
     {
         // SELECT
         List<string> GetUniqueName();
-        List<RealEstate> GetSpecificColumns();
-        string AnonymousClass();
+  //      List<T> GetSpecificColumns();
+   //     string AnonymousClass();
 
         // ORDER BY
-        public List<RealEstate> OrderByNames();
-        public List<RealEstate> OrderByNamesAndValueDescending();
-        public List<RealEstate> OrderByValue();
+        public List<T> OrderByNames();
+   //     public List<T> OrderByNamesAndValueDescending();
+        public List<T> OrderByValue();
 
         //Where
-        List<RealEstate> WhereStartsWith(string prefix);
-        List<RealEstate> WhereNameIs(string author);
+        List<T> WhereStartsWith(string prefix);
+        List<T> WhereNameIs(string author);
 
         // FIRST, LAST, SINGLE
-        RealEstate FirstOrDefaultByNameWithDefault(string name);
-        RealEstate? FirstByValue();
-        RealEstate LastByName(string author);
-        RealEstate SingleById(int id);
-        RealEstate? SingleOrDefaultById(int id);
+        T FirstOrDefaultByNameWithDefault(string name);
+        T? FirstByValue();
+        T LastByName(string author);
+        T SingleById(int id);
+        T? SingleOrDefaultById(int id);
 
         // TAKE
-        List<RealEstate> TakeRealEstates(int howMany);
-        List<RealEstate> TakeRealEstates(Range range);
-        List<RealEstate> TakeRealEstatesWhileRealiseDataAfter(DateTime date);
+        List<T> TakeRealEstates(int howMany);
+        List<T> TakeRealEstates(Range range);
+  //      List<T> TakeTsWhileRealiseDataAfter(DateTime date);
 
         // SKIP
-        List<RealEstate> SkipRealEstates(int howMany);
-        List<RealEstate> SkipRealEstatesWhileRealiseDataAfter(DateTime date);
+   //     List<T> SkipTs(int howMany);
+   //     List<T> SkipTsWhileRealiseDataAfter(DateTime date);
 
         // DISTINCT
         List<string> DistinctAllNames();
-        List<RealEstate> DistinctByName();
+        List<T> DistinctByName();
 
         // CHUNK
-        List<RealEstate[]> ChunkRealEstates(int size);
+        List<T[]> ChunkRealEstates(int size);
     }
 }
