@@ -6,12 +6,12 @@ namespace TDev.DataProviders
     {
         // SELECT
         List<string> GetUniqueName();
-  //      List<T> GetSpecificColumns();
-   //     string AnonymousClass();
+        //      List<T> GetSpecificColumns();
+        //     string AnonymousClass();
 
         // ORDER BY
         public List<T> OrderByNames();
-   //     public List<T> OrderByNamesAndValueDescending();
+        //     public List<T> OrderByNamesAndValueDescending();
         public List<T> OrderByValue();
 
         //Where
@@ -28,11 +28,11 @@ namespace TDev.DataProviders
         // TAKE
         List<T> TakeRealEstates(int howMany);
         List<T> TakeRealEstates(Range range);
-  //      List<T> TakeTsWhileRealiseDataAfter(DateTime date);
+        //      List<T> TakeTsWhileRealiseDataAfter(DateTime date);
 
         // SKIP
-   //     List<T> SkipTs(int howMany);
-   //     List<T> SkipTsWhileRealiseDataAfter(DateTime date);
+        //     List<T> SkipTs(int howMany);
+        //     List<T> SkipTsWhileRealiseDataAfter(DateTime date);
 
         // DISTINCT
         List<string> DistinctAllNames();

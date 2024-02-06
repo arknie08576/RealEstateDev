@@ -4,7 +4,7 @@ using TDev.DataProviders;
 
 namespace RealEstateDev.Components.DataProviders
 {
-    public class RealEstateProvider<T> : IRealEstateProvider<T> where T : class, IEntity, new ()
+    public class RealEstateProvider<T> : IRealEstateProvider<T> where T : class, IEntity, new()
     {
         private readonly IRepository<T> _RealEstatesRepository;
 

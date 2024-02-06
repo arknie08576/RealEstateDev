@@ -30,10 +30,12 @@ namespace RealEstateDev.Repositories
         public void Add(T item)
         {
             _dbSet.Add(item);
+            ItemAdded.Invoke(this, item);
         }
         public void Remove(T item)
         {
             _dbSet.Remove(item);
+            ItemRemoved.Invoke(this, item);
         }
         public void Save()
         {

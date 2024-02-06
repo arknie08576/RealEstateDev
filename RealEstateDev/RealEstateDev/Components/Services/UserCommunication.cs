@@ -10,10 +10,11 @@ namespace RealEstateDev.Services
         private readonly IRepository<House> _reHRepository;
         private readonly IRealEstateProvider<Apartment> _reAProvider;
         private readonly IRealEstateProvider<House> _reHProvider;
-        public UserCommunication(IRepository<Apartment> reARepository, IRepository<House> reHRepository, IRealEstateProvider<Apartment> reAProvider, IRealEstateProvider<House> reHProvider) {
-            _reARepository=reARepository;
+        public UserCommunication(IRepository<Apartment> reARepository, IRepository<House> reHRepository, IRealEstateProvider<Apartment> reAProvider, IRealEstateProvider<House> reHProvider)
+        {
+            _reARepository = reARepository;
             _reHRepository = reHRepository;
-            _reAProvider =reAProvider;
+            _reAProvider = reAProvider;
             _reHProvider = reHProvider;
             _reARepository.ItemAdded += RealEstateRepoOnItemAdded;
             _reARepository.ItemRemoved += RealEstateRepoOnItemRemoved;
@@ -114,7 +115,7 @@ namespace RealEstateDev.Services
                             }
                             _reARepository.Save();
                         }
-                
+
                         break;
                     case "4":
                         _reARepository.Save();
@@ -133,7 +134,7 @@ namespace RealEstateDev.Services
 
                     case "7":
 
-                        
+
                         int val;
                         while (true)
                         {
@@ -176,8 +177,8 @@ namespace RealEstateDev.Services
 
                         break;
                     case "9":
-                        
-                            foreach(var item in _reHProvider.OrderByValue())
+
+                        foreach (var item in _reHProvider.OrderByValue())
                         {
                             Console.WriteLine(item.ToString());
                         }
@@ -189,44 +190,109 @@ namespace RealEstateDev.Services
                             Console.WriteLine(item.ToString());
                         }
                         break;
+                    case "11":
+                        Console.WriteLine("Wpisz id domu do edycji");
+                        int vala;
+                        while (true)
+                        {
+                            vala = Int32.Parse(Console.ReadLine());
+                            var house = _reHRepository.GetById(vala);
+                            if (house != null)
+                            {
+                                _reHRepository.Remove(house);
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Wrong ID");
+                            }
+                        }
+
+                        Console.WriteLine(_reHProvider.SingleOrDefaultById(vala).ToString());
+                        Console.WriteLine("Wpisz nazwę domu");
+                        string namee = Console.ReadLine();
+                        Console.WriteLine("Wpisz wartość domu");
+                        int valuee = Int32.Parse(Console.ReadLine());
+                        Console.WriteLine("Wpisz powierzchnię domu");
+                        int areaa = Int32.Parse(Console.ReadLine());
+                        Console.WriteLine("Wpisz powierzchnię działki domu");
+                        int landAreaa = Int32.Parse(Console.ReadLine());
+                        var h = new House(namee, valuee, areaa, landAreaa);
+                        h.Id = vala;
+
+                        _reHRepository.Add(h);
+                        _reHRepository.Save();
+                        break;
+                    case "12":
+                        Console.WriteLine("Wpisz id mieszkania do edycji");
+                        int valq;
+                        while (true)
+                        {
+                            valq = Int32.Parse(Console.ReadLine());
+                            var house = _reARepository.GetById(valq);
+                            if (house != null)
+                            {
+                                _reARepository.Remove(house);
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Wrong ID");
+                            }
+                        }
+                        Console.WriteLine("Wpisz nazwę mieszkania");
+                        string nameq = Console.ReadLine();
+                        Console.WriteLine("Wpisz wartość mieszkania");
+                        int valueq = Int32.Parse(Console.ReadLine());
+                        Console.WriteLine("Wpisz powierzchnię mieszkania");
+                        int areaq = Int32.Parse(Console.ReadLine());
+                        Console.WriteLine("Wpisz piętro mieszkania");
+                        int floorq = Int32.Parse(Console.ReadLine());
+                        var a = new Apartment(nameq, valueq, areaq, floorq);
+                        a.Id = valq;
+                        _reARepository.Add(a);
+                        _reARepository.Save();
+                        break;
                     default:
                         break;
                 }
             }
         }
-            void PrintMenu()
-            {
-                Console.WriteLine("Witaj w programie do zarządzania nieruchomościami");
-                Console.WriteLine("Wpisz 1 aby wyświetlić posiadane nieruchomości");
-                Console.WriteLine("Wpisz 2 aby dodać nieruchomość");
-                Console.WriteLine("Wpisz 3 aby usunąć nieruchomość");
-                Console.WriteLine("Wpisz 4 aby zamknąć program");
-                Console.WriteLine("Wpisz 5 aby wyświetlić najtańszy dom");
-                Console.WriteLine("Wpisz 6 aby wyświetlić najtańsze mieszkanie");
-                Console.WriteLine("Wpisz 7 aby wyświetlić dom o podanym Id");
-                Console.WriteLine("Wpisz 8 aby wyświetlić mieszkanie o podanym Id");
-                Console.WriteLine("Wpisz 9 aby wyświetlić najtańsze domy");
-                Console.WriteLine("Wpisz 10 aby wyświetlić najtańsze mieszkania");
+        void PrintMenu()
+        {
+            Console.WriteLine("Witaj w programie do zarządzania nieruchomościami");
+            Console.WriteLine("Wpisz 1 aby wyświetlić posiadane nieruchomości");
+            Console.WriteLine("Wpisz 2 aby dodać nieruchomość");
+            Console.WriteLine("Wpisz 3 aby usunąć nieruchomość");
+            Console.WriteLine("Wpisz 4 aby zamknąć program");
+            Console.WriteLine("Wpisz 5 aby wyświetlić najtańszy dom");
+            Console.WriteLine("Wpisz 6 aby wyświetlić najtańsze mieszkanie");
+            Console.WriteLine("Wpisz 7 aby wyświetlić dom o podanym Id");
+            Console.WriteLine("Wpisz 8 aby wyświetlić mieszkanie o podanym Id");
+            Console.WriteLine("Wpisz 9 aby wyświetlić najtańsze domy");
+            Console.WriteLine("Wpisz 10 aby wyświetlić najtańsze mieszkania");
+            Console.WriteLine("Wpisz 11 aby edytować dom");
+            Console.WriteLine("Wpisz 12 aby edytować mieszkanie");
 
         }
-            static void RealEstateRepoOnItemAdded(object? sender, RealEstate item)
-            {
-                string logfile = "log.txt";
+        static void RealEstateRepoOnItemAdded(object? sender, RealEstate item)
+        {
+            string logfile = "log.txt";
 
-                string s = ("[" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "]-RealEstateAdded-[" + item.Name + "]");
-                File.AppendAllText(logfile, s + Environment.NewLine);
-            }
-            static void RealEstateRepoOnItemRemoved(object? sender, RealEstate item)
-            {
-                string logfile = "log.txt";
+            string s = ("[" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "]-RealEstateAdded-[" + item.Name + "]");
+            File.AppendAllText(logfile, s + Environment.NewLine);
+        }
+        static void RealEstateRepoOnItemRemoved(object? sender, RealEstate item)
+        {
+            string logfile = "log.txt";
 
-                string s = ("[" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "]-RealEstateRemoved-[" + item.Name + "]");
-                File.AppendAllText(logfile, s + Environment.NewLine);
-            }
+            string s = ("[" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + "]-RealEstateRemoved-[" + item.Name + "]");
+            File.AppendAllText(logfile, s + Environment.NewLine);
+        }
 
 
-        
 
-       
+
+
     }
 }
