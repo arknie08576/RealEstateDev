@@ -18,11 +18,6 @@ namespace RealEstateDev.Data
         }
         public DbSet<House> Houses { get; set; }
         public DbSet<Apartment> Apartments { get; set; }
-        //public DbSet<RealEstate> RealEstates => Set<RealEstate>();
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    base.OnConfiguring(optionsBuilder);
-        //    optionsBuilder.UseInMemoryDatabase("StorageAppDb");
-        //}
+
     }
 }

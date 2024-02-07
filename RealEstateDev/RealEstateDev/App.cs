@@ -16,94 +16,20 @@ namespace RealEstateDev
     {
         private readonly IUserCommunication _userCommunication;
         private readonly ICsvReader _csvReader;
-        private readonly IXmlCreator _xmlCreator;
         RealEstateDevDbContex _dbContex;
 
-        public App(IUserCommunication userCommunication, ICsvReader csvReader, IXmlCreator xmlCreator, RealEstateDevDbContex dbContex)
+        public App(IUserCommunication userCommunication, ICsvReader csvReader, RealEstateDevDbContex dbContex)
         {
             _userCommunication = userCommunication;
             _csvReader = csvReader;
-            _xmlCreator = xmlCreator;
             _dbContex = dbContex;
             _dbContex.Database.EnsureCreated();
         }
         public void Run()
         {
-            // CreateXml();
-            // QueryXml();
-            // _csvReader.Reader();
-            // InsertData();
-            //ReadGroupedCarsFromDb();
-
-            //  _xmlCreator.CreateTemplatedXml();
             _userCommunication.CommunicationWithUser();
         }
-        //private void RemoveCar(string name)
-        //{
-        //    var car = this.ReadFirstOrDefault(name);
-        //    _dbContex.Cars.Remove(car);
-        //    _dbContex.SaveChanges();
-        //}
-        //private void ChangeName(string name)
-        //{
-        //    var car = this.ReadFirstOrDefault(name);
-        //    car.Name = "Mój samochód";
-        //    _dbContex.SaveChanges();
-
-        //}
-
-        //private Car? ReadFirstOrDefault(string name)
-        //{
-        //    return _dbContex.Cars.FirstOrDefault(x=>x.Name == name);
-
-        //}
-        //private void ReadGroupedCarsFromDb()
-        //{
-
-        //    var query = _dbContex.Cars.GroupBy(x => x.Manufacturer).
-        //        Select(x => new
-        //        {
-        //            Name = x.Key,
-        //            Cars=x.ToList()
-        //        }).ToList();
-        //    foreach(var group in query) {
-        //        Console.WriteLine(group.Name);
-        //        Console.WriteLine("=======");
-        //        foreach(var car in group.Cars)
-        //        {
-        //            Console.WriteLine($"\t{car.Name}: {car.Combined}");
-        //        }
-        //        Console.WriteLine();
-
-
-        //    }
-        //}
-        //private void ReadAllCarsFromDb()
-        //{
-        //    var carsFromDb = _dbContex.Cars.ToList();
-        //}
-        //private void InsertData()
-        //{
-        //    var cars = _csvReader.ProcessCars("Resources\\Files\\fuel.csv");
-        //    foreach (var car in cars)
-        //    {
-        //        _dbContex.Cars.Add(new Car()
-        //        {
-        //            Manufacturer = car.Manufacturer,
-        //            Name = car.Name,
-        //            Year = car.Year,
-        //            City = car.City,
-        //            Combined = car.Combined,
-        //            Cylinders = car.Cylinders,
-        //            Displacement = car.Displacement,
-        //            Highway = car.Highway
-
-        //        });
-
-        //    }
-        //    _dbContex.SaveChanges();
-        //}
-
+       
         private void CreateXml()
         {
             var records = _csvReader.ProcessCars("Resources\\Files\\fuel.csv");

@@ -69,30 +69,13 @@ namespace RealEstateDev.Components.CsvReader
                 Average = g.Average(c => c.Combined)
             }).OrderBy(x => x.Average);
 
-            //foreach (var group in groups)
-            //{
-            //    Console.WriteLine($"{group.Name}");
-            //    Console.WriteLine($"Max: {group.Max}");
-            //    Console.WriteLine($"Average: {group.Average}");
-            //}
 
             var carsInCountry = cars.Join(manufacturers, x => new { x.Manufacturer, x.Year }, x => new { Manufacturer = x.Name, x.Year }, (car, manufacturer) => new
             {
                 manufacturer.Country,
                 car.Name,
                 car.Combined
-
-
             }).OrderByDescending(x => x.Combined).ThenBy(x => x.Name);
-
-            //foreach (var car in carsInCountry)
-            //{
-            //    Console.WriteLine($"Country: {car.Country}");
-            //    Console.WriteLine($"\tName: {car.Name}");
-            //    Console.WriteLine($"\tCombined: {car.Combined}");
-
-
-            //}
 
             var grupy = manufacturers.GroupJoin(cars, manufacturer => manufacturer.Name, car => car.Manufacturer, (m, g) => new
             {
@@ -100,18 +83,6 @@ namespace RealEstateDev.Components.CsvReader
                 Cars = g
 
             }).OrderBy(x => x.Manufacturer.Name);
-            //foreach (var group in grupy)
-            //{
-            //    Console.WriteLine($"Manufacturer: {group.Manufacturer.Name}");
-            //    Console.WriteLine($"\tCars: {group.Cars.Count()}");
-            //    Console.WriteLine($"\tMax: {group.Cars.Max(x => x.Combined)}");
-            //    Console.WriteLine($"\tMin: {group.Cars.Min(x => x.Combined)}");
-            //    Console.WriteLine($"\tAvg: {group.Cars.Average(x => x.Combined)}");
-            //    Console.WriteLine();
-
-
-            //}
-
 
         }
     }

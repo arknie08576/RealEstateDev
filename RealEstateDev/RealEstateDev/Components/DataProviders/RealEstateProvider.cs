@@ -20,52 +20,12 @@ namespace RealEstateDev.Components.DataProviders
             return RealEstates.Select(x => x.Name.ToString()).Distinct().ToList();
         }
 
-        //public List<RealEstate> GetSpecificColumns()
-        //{
-        //    var RealEstates = _RealEstatesRepository.GetAll();
-        //    return RealEstates.Select(RealEstate => new RealEstate
-        //    {
-        //        Id = RealEstate.Id,
-        //        Area = RealEstate.Area,
-        //        Name = RealEstate.Name,
-        //        Value = RealEstate.Value
-        //    }).ToList();
-        //}
-
-        //public string AnonymousClass()
-        //{
-        //    var RealEstates = _RealEstatesRepository.GetAll();
-        //    var list = RealEstates.Select(RealEstate => new
-        //    {
-        //        Identifier = RealEstate.Id,
-        //        RealEstateName = RealEstate.Name,
-        //        RealEstateValue = RealEstate.Value
-        //    });
-        //    StringBuilder sb = new StringBuilder(2048);
-        //    foreach (var RealEstate in list)
-        //    {
-        //        sb.AppendLine($"Product ID: {RealEstate.Identifier}");
-        //        sb.AppendLine($"    RealEstate Name: {RealEstate.RealEstateName}");
-        //        sb.AppendLine($"    RealEstate Value: {RealEstate.RealEstateValue}");
-        //    }
-
-        //    return sb.ToString();
-        //}
-
         // ORDER BY
         public List<T> OrderByNames()
         {
             var RealEstates = _RealEstatesRepository.GetAll();
             return RealEstates.OrderBy(x => x.Name).ToList();
         }
-        //public List<T> OrderByNamesAndValueDescending()
-        //{
-        //    var RealEstates = _RealEstatesRepository.GetAll();
-        //    return RealEstates
-        //        .OrderByDescending(x => x.Name)
-        //        .ThenByDescending(x => x.Value)
-        //        .ToList();
-        //}
 
         public List<T> OrderByValue()
         {
@@ -140,34 +100,6 @@ namespace RealEstateDev.Components.DataProviders
                 .Take(range)
                 .ToList();
         }
-
-        //public List<RealEstate> TakeRealEstatesWhileRealiseDataAfter(DateTime date)
-        //{
-        //    var RealEstates = _RealEstatesRepository.GetAll();
-        //    return RealEstates
-        //        .OrderByDescending(x => x.dateTime)
-        //        .TakeWhile(x => x.dateTime >= date)
-        //        .ToList();
-        //}
-
-        // SKIP
-        //public List<RealEstate> SkipRealEstates(int howMany)
-        //{
-        //    var RealEstates = _RealEstatesRepository.GetAll();
-        //    return RealEstates
-        //        .OrderBy(x => x.Name)
-        //        .Skip(howMany)
-        //        .ToList();
-        //}
-
-        //public List<RealEstate> SkipRealEstatesWhileRealiseDataAfter(DateTime date)
-        //{
-        //    var RealEstates = _RealEstatesRepository.GetAll();
-        //    return RealEstates
-        //       .OrderByDescending(x => x.dateTime)
-        //       .SkipWhile(x => x.dateTime >= date)
-        //       .ToList();
-        //}
 
         // DISTINCT
         public List<string> DistinctAllNames()
