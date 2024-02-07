@@ -25,7 +25,7 @@ namespace RealEstateDev.Services
         {
 
             bool runProgram = true;
-            while (runProgram)
+            while (runProgram)  
             {
                 PrintMenu();
                 string menuOption = "0";
